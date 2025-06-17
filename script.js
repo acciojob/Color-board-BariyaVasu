@@ -1,14 +1,21 @@
-//your JS code here. If required.
-const squares = document.querySelectorAll('.square');
+const container = document.getElementById('container');
 
-squares.forEach(square => {
+// Create 100 squares (10x10)
+for (let i = 0; i < 100; i++) {
+  const square = document.createElement('div');
+  square.classList.add('square');
+
+  // Hover effect
   square.addEventListener('mouseenter', () => {
     square.style.backgroundColor = '#652BCD';
   });
 
+  // Revert after 1 second
   square.addEventListener('mouseleave', () => {
     setTimeout(() => {
       square.style.backgroundColor = '#2B2B2B';
-    }, 1000); // Revert after 1 second
+    }, 1000);
   });
-});
+
+  container.appendChild(square);
+}
