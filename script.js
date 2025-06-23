@@ -1,24 +1,22 @@
-  const board = document.getElementById('board');
-  const boxCount = 800;
+const container = document.getElementById('container');
+const COLORS = ['#e74c3c', '#8e44ad', '#3498db', '#16a085', '#f39c12', '#2ecc71'];
 
-  const colors = ['#e63946', '#f1fa8c', '#43aa8b', '#577590', '#9b5de5', '#f15bb5', '#ff9f1c', '#38bdf8'];
+for (let i = 0; i < 800; i++) {
+  const square = document.createElement('div');
+  square.classList.add('square');
 
-  for (let i = 0; i < boxCount; i++) {
-    const box = document.createElement('div');
-    box.classList.add('box');
+  square.addEventListener('mouseenter', () => {
+    const color = getRandomColor();
+    square.style.backgroundColor = color;
 
-    // Hover in
-    box.addEventListener('mouseenter', () => {
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      box.style.backgroundColor = randomColor;
-    });
+    setTimeout(() => {
+      square.style.backgroundColor = '#222';
+    }, 1000); // revert after 1 second
+  });
 
-    // Hover out (optional: fade back to dark)
-    box.addEventListener('mouseleave', () => {
-      setTimeout(() => {
-        box.style.backgroundColor = '#222';
-      }, 200);
-    });
+  container.appendChild(square);
+}
 
-    board.appendChild(box);
-  }
+function getRandomColor() {
+  return COLORS[Math.floor(Math.random() * COLORS.length)];
+}
