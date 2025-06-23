@@ -1,28 +1,24 @@
-const grid = document.getElementById('grid');
-const totalCols = 40;
-const totalRows = 20;
-const colors = ['#e63946', '#f1fa8c', '#43aa8b', '#577590', '#9b5de5', '#f15bb5', '#ff9f1c'];
+  const board = document.getElementById('board');
+  const boxCount = 800;
 
-for (let i = 0; i < totalCols * totalRows; i++) {
-  const cell = document.createElement('div');
-  cell.classList.add('cell');
-  grid.appendChild(cell);
-}
+  const colors = ['#e63946', '#f1fa8c', '#43aa8b', '#577590', '#9b5de5', '#f15bb5', '#ff9f1c', '#38bdf8'];
 
-function animateGrid() {
-  const cells = document.querySelectorAll('.cell');
+  for (let i = 0; i < boxCount; i++) {
+    const box = document.createElement('div');
+    box.classList.add('box');
 
-  setInterval(() => {
-    // Reset all cells to default
-    cells.forEach(cell => cell.style.backgroundColor = '#222');
+    // Hover in
+    box.addEventListener('mouseenter', () => {
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      box.style.backgroundColor = randomColor;
+    });
 
-    // Light up a few random cells
-    for (let i = 0; i < 30; i++) {
-      const index = Math.floor(Math.random() * cells.length);
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      cells[index].style.backgroundColor = color;
-    }
-  }, 300);
-}
+    // Hover out (optional: fade back to dark)
+    box.addEventListener('mouseleave', () => {
+      setTimeout(() => {
+        box.style.backgroundColor = '#222';
+      }, 200);
+    });
 
-animateGrid();
+    board.appendChild(box);
+  }
